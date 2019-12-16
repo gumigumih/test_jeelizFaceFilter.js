@@ -183,7 +183,7 @@ function init_scene(spec){
     CTX.strokeStyle=SETTINGS.strokeStyle;
     CTX.lineWidth=4;
     var frameImage=new Image()
-    frameImage.src='../images/frame.png';
+    frameImage.src='assets/images/frame.png';
     frameImage.onload=function(){
         CTX.drawImage(frameImage, 0, 0, frameImage.width, frameImage.height, 0, 0, CANVAS2D.width, CANVAS2D.height);
         update_canvasTexture();
@@ -365,7 +365,7 @@ function update_canvasTexture(){
 function main(){
     JEEFACEFILTERAPI.init({
         canvasId: 'jeeFaceFilterCanvas',
-        NNCpath: '../ncc/', //root of NNC.json file
+        NNCpath: 'assets/ncc/', //root of NNC.json file
         callbackReady: function(errCode, spec){
             if (errCode){
                 console.log('AN ERROR HAPPENS. SORRY BRO :( . ERR =', errCode);
