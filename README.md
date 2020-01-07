@@ -8,3 +8,5 @@
 ## テストページ
 - 顔ハメテスト
   - [テストページ](https://gumigumih.github.io/jeelizFaceFilter.js_test/firstTest/)
+- 顔ハメ3D
+  - [テストページ](https://gumigumih.github.io/jeelizFaceFilter.js_test/3dHeadTest/)
