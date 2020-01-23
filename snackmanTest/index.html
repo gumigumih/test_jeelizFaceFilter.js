@@ -22,7 +22,14 @@
             overflow-y: auto;
             margin: 0px;
         }
-
+        .wrap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vh;
+            height: 100vh;
+            transform: translate(-50%, -50%);
+        }
         #jeeFaceFilterCanvas {
             z-index: 10;
             position: absolute;
@@ -30,30 +37,36 @@
             height: 100%;
             top: 0px;
             left: 0px;
+            transform: tra;
         }
     </style>
 </head>
 
 <body onload="main()" style='color: white'>
-    <canvas width="600" height="600" id='jeeFaceFilterCanvas'></canvas>
+    <div class="wrap">
+        <canvas width="600" height="600" id='jeeFaceFilterCanvas'></canvas>
 
-    <!-- BEGIN OF A-FRAME SCENE -->
-    <!-- All objects with the ID jeelizFaceFilterFollow will follow the head -->
-    <a-scene embedded>
-        <!-- <a-assets>
-            <a-asset-item id="model" src="./assets/models/bangs-front.glb"></a-asset-item>
-        </a-assets> -->
+        <!-- BEGIN OF A-FRAME SCENE -->
+        <!-- All objects with the ID jeelizFaceFilterFollow will follow the head -->
+        <a-scene embedded>
+            <a-assets>
+                <a-asset-item id="cube-above" src="./assets/models/cube-above.glb"></a-asset-item>
+                <a-asset-item id="cube-below" src="./assets/models/cube-below.glb"></a-asset-item>
+            </a-assets>
 
-        <a-entity id="jeelizFaceFilterFollow">
-            <a-box position="0 0.5 0" rotation="0 0 0" width="1" height="1" depth="1" color="#4CC3D9"></a-box>
-            <a-box position="0 0 0" rotation="0 0 0" width="1" height="0.5" depth="1" color="#4CC3D9"></a-box>
 
-            <!-- <a-gltf-model src="#model" position="0 0 0" rotation="0 180 0" scale="2 2 2" visible="true"></a-gltf-model> -->
-        </a-entity>
+            <a-entity id="jeelizFaceFilterFollow" position="0 0.75 0" scale="0.8 0.8 0.8">
+                <a-gltf-model src="#cube-above" position="0 -0.65 -0.5" rotation="0 90 0" scale="2 2 2" visible="true" gltf-model=""></a-gltf-model>
+                <a-gltf-model id="jeelizFaceFilterMouse" src="#cube-below" position="0 0 -0.5" rotation="0 90 0" scale="2 2 2" visible="true" gltf-model=""></a-gltf-model>
 
-    </a-scene>
-    <!-- END OF A-FRAME SCENE -->
+                <!-- <a-box position="0 0.1 0" rotation="0 0 0" width="1" height="1" depth="1" color="#ff00ff"></a-box>
+                <a-box id="jeelizFaceFilterMouse" position="0 0 0" rotation="0 0 0" width="1" height="0.5" depth="1" color="#4CC3D9"></a-box> -->
 
+            </a-entity>
+
+        </a-scene>
+        <!-- END OF A-FRAME SCENE -->
+    </div>
 </body>
 
 </html>

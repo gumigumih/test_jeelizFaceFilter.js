@@ -22,7 +22,7 @@ var SETTINGS={
 };
 
 //some globalz :
-var THREEVIDEOTEXTURE, THREERENDERER, THREEFACEOBJ3D, THREEFACEOBJ3DPIVOTED, THREESCENE, THREECAMERA, AFRAMEINSTANCE, JAWMESH;
+var THREEVIDEOTEXTURE, THREERENDERER, THREEFACEOBJ3D, THREEFACEOBJ3DPIVOTED, THREESCENE, THREECAMERA, AFRAMEINSTANCE, MOUSEOBJ;
 var ISDETECTED=false, ISLOADED=false;
 
 //callback : launched if a face is detected or lost. TODO : add a cool particle effect WoW !
@@ -74,6 +74,7 @@ function init_threeScene(spec){
     THREEFACEOBJ3DPIVOTED.position.set(0, -SETTINGS.pivotOffsetYZ[0], -SETTINGS.pivotOffsetYZ[1]);
     THREEFACEOBJ3DPIVOTED.scale.set(SETTINGS.scale, SETTINGS.scale, SETTINGS.scale);
     THREEFACEOBJ3D.add(THREEFACEOBJ3DPIVOTED);
+    MOUSEOBJ = document.getElementById('jeelizFaceFilterMouse');
 
     //get the scene from A-Frame :
     THREESCENE=AFRAMEINSTANCE.object3D;
@@ -185,9 +186,12 @@ function main(){
                 THREEFACEOBJ3D.rotation.set(detectState.rx+SETTINGS.rotationOffsetX, detectState.ry, detectState.rz, "XYZ");
 
                 //mouth opening
-                // var mouthOpening=detectState.expressions[0];
-                // mouthOpening=smoothStep(0.35, 0.7, mouthOpening);
-                // JAWMESH.position.y=-(0.5+0.15+0.01+0.7*mouthOpening*0.5);
+                var mouthOpening=detectState.expressions[0];
+                mouthOpening=smoothStep(0.35, 0.7, mouthOpening);
+                var position = MOUSEOBJ.getAttribute("position");
+                console.log(mouthOpening);
+                position.y=-(0.5+0.15+0.01+0.7*mouthOpening*0.5);
+                MOUSEOBJ.setAttribute("position", position);
             }
 
             //reinitialize the state of THREE.JS because JEEFACEFILTER have changed stuffs
@@ -198,3 +202,9 @@ function main(){
         } //end callbackTrack()
     }); //end JEEFACEFILTERAPI.init call
 } //end main()
+
+//analoguous to GLSL smoothStep function
+function smoothStep(edge0, edge1, x){
+    var t = Math.min(Math.max((x - edge0) / (edge1 - edge0), 0.0), 1.0);
+    return t * t * (3.0 - 2.0 * t);
+}
