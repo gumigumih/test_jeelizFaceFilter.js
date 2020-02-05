@@ -9,7 +9,6 @@
  * Thank you all, you're awesome!
  */
 
-
 var _Group = function () {
     this._tweens = {};
     this._tweensAddedDuringUpdate = {};
@@ -17,71 +16,48 @@ var _Group = function () {
 
 _Group.prototype = {
     getAll: function () {
-
         return Object.keys(this._tweens).map(function (tweenId) {
             return this._tweens[tweenId];
         }.bind(this));
-
     },
-
     removeAll: function () {
-
         this._tweens = {};
-
     },
-
     add: function (tween) {
-
         this._tweens[tween.getId()] = tween;
         this._tweensAddedDuringUpdate[tween.getId()] = tween;
-
     },
-
     remove: function (tween) {
-
         delete this._tweens[tween.getId()];
         delete this._tweensAddedDuringUpdate[tween.getId()];
-
     },
-
     update: function (time, preserve) {
-
         var tweenIds = Object.keys(this._tweens);
-
         if (tweenIds.length === 0) {
             return false;
         }
-
         time = time !== undefined ? time : TWEEN.now();
-
         // Tweens are updated in "batches". If you add a new tween during an update, then the
         // new tween will be updated in the next batch.
         // If you remove a tween during an update, it will normally still be updated. However,
         // if the removed tween was added during the current batch, then it will not be updated.
         while (tweenIds.length > 0) {
             this._tweensAddedDuringUpdate = {};
-
             for (var i = 0; i < tweenIds.length; i++) {
-
                 if (this._tweens[tweenIds[i]].update(time) === false) {
                     this._tweens[tweenIds[i]]._isPlaying = false;
-
                     if (!preserve) {
                         delete this._tweens[tweenIds[i]];
                     }
                 }
             }
-
             tweenIds = Object.keys(this._tweensAddedDuringUpdate);
         }
-
         return true;
-
     }
 };
 
 var TWEEN = new _Group();
-
 TWEEN.Group = _Group;
 TWEEN._nextId = 0;
 TWEEN.nextId = function () {

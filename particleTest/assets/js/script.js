@@ -136,6 +136,8 @@ function init_threeScene(spec){
 
 //launched by body.onload() :
 function main(){
+    // document.getElementById("particle").components['particle-system'].startParticles();
+    
     JEEFACEFILTERAPI.init({
         canvasId: 'jeeFaceFilterCanvas',
         NNCpath: 'assets/ncc/', //root of NNC.json file
