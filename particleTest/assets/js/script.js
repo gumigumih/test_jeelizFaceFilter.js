@@ -58,6 +58,7 @@ function init_aFrame(spec){
         canvas: spec.canvasElement
     });
 
+    
     //get AFRAME initialized THREE.JS renderer
     THREERENDERER=AFRAMEINSTANCE.renderer;
     init_threeScene(spec);
@@ -146,6 +147,8 @@ function main(){
                 console.log('AN ERROR HAPPENS. SORRY BRO :( . ERR =', errCode);
                 return;
             }
+
+            setTimeout(animation, 100);
 
             console.log('INFO : JEEFACEFILTERAPI IS READY');
             init_aFrame(spec);

@@ -12,9 +12,10 @@
 
   <!-- INCLUDE A MODIFIED VERSION OF AFRAME -->
   <!-- SEARCH FOR "JEELIZ" COMMENT TO SEE THE MODIFS -->
-  <script src="./assets/js/libs/aFrame/aframe-v0.7.0_modified.js"></script>
-  <script src="./assets/js/libs/aFrame/aframe-particle-system-component.js"></script>
-  
+  <script src="./assets/js/libs/aFrame/aframe-v0.8.2_modified.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+
+  <script src="./assets/js/sakura.js"></script>
   <script src="./assets/js/script.js"></script>
 
   <style>
@@ -48,13 +49,16 @@
 
     <!-- BEGIN OF A-FRAME SCENE -->
     <!-- All objects with the ID jeelizFaceFilterFollow will follow the head -->
-    <a-scene embedded>
+    <a-scene physics="debug: true">
       <a-assets>
         <a-asset-item id="model" src="./assets/models/ebisen.glb"></a-asset-item>
+        <img id="sakura" src="./assets/images/sakura.png">
       </a-assets>
 
-      <a-entity id="particle" position="0 2.25 -15" particle-system="preset: snow"></a-entity>
-      <a-gltf-model id="jeelizFaceFilterFollow" src="#model" position="0 0 0" rotation="0 180 0" scale="0.1 0.1 0.1" visible="true"></a-gltf-model>
+      <a-entity id="jeelizFaceFilterFollow">
+        <a-gltf-model src="#model" position="0 0 0" rotation="0 180 0" scale="4 4 4" visible="true"></a-gltf-model>
+        <a-image dynamic-body id="sakura" src="#sakura" position="0 1 1" rotation="0 0 0" width="1" height="1"></a-image>
+      </a-entity>
 
     </a-scene>
     <!-- END OF A-FRAME SCENE -->
